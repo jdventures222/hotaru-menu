@@ -1,0 +1,124 @@
+/* Paper is the light counterpart of the Burner Panel. Shared pills, chips, labels
+   and ghost-eight readouts inherit these local ink tokens without a second accent. */
+:root {
+  --print-ink: var(--amber-ink);
+  --print-secondary: var(--seam-2);
+  --print-faint: var(--text-2);
+  --print-outline: var(--text-3);
+  --print-paper: var(--text);
+  --print-white: rgb(255 255 255);
+}
+
+#actions { display: none; }
+body, body:has(.actions > :nth-child(3)) { padding-bottom: 0; }
+.print-toolbar { padding-top: 30px; }
+.print-toolbar p { margin: 12px 0 16px; color: var(--text-2); }
+.print-toolbar button { width: 100%; font-family: var(--ui); font-size: 1.0625rem; cursor: pointer; }
+.print-preview-wrap { margin-top: 30px; }
+.print-preview {
+  width: 100%;
+  max-width: calc(8.5in + 2px);
+  margin-inline: auto;
+  border: 1px solid var(--seam);
+  background: var(--print-paper);
+}
+.print-sheet {
+  --text: var(--print-ink);
+  --text-2: var(--print-secondary);
+  --text-3: var(--print-outline);
+  --seam: var(--print-faint);
+  --seam-2: var(--print-outline);
+  --ghost: var(--print-faint);
+  --unlit: var(--print-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 8.5in;
+  min-height: 11in;
+  padding: .5in;
+  zoom: var(--preview-scale, 1);
+  background: var(--print-paper);
+  color: var(--text);
+  color-scheme: light;
+  font-size: .9375rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.print-sheet .readout .lit { color: var(--print-ink); }
+.print-heading p { margin: 0; }
+.print-name { font-size: 1.625rem; line-height: 1.1; }
+.print-contact { padding-top: 8px; color: var(--text-2); }
+.print-hours { display: flex; align-items: baseline; gap: 12px; padding-top: 8px; }
+.print-hours h2 { flex: none; }
+.print-hours ul { display: flex; flex-wrap: wrap; gap: 8px 16px; list-style: none; padding: 0; margin: 0; }
+.print-section { min-width: 0; }
+.print-section h2 {
+  margin: 0 0 8px;
+  font-size: 1.375rem;
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+.print-section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.print-section-head p { margin: 0 0 8px; color: var(--text-2); }
+
+/* Equal columns keep the combined option as prominent as the other two. */
+.print-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--seam); }
+.print-option { min-width: 0; padding: 12px; }
+.print-option:first-child { padding-left: 0; }
+.print-option:last-child { padding-right: 0; }
+.print-option + .print-option { border-left: 1px solid var(--seam); }
+.print-option-name { display: flex; flex-direction: column; align-items: start; gap: 8px; min-height: 64px; padding-bottom: 8px; }
+.print-option h3 { font-size: 1.625rem; font-weight: 800; font-stretch: 112%; line-height: 1.1; letter-spacing: .02em; text-transform: uppercase; }
+.print-period { display: flex; flex-direction: column; align-items: start; gap: 8px; padding-block: 8px; }
+.print-period + .print-period { border-top: 1px solid var(--seam); }
+.print-period-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; width: 100%; min-height: 24px; }
+.print-note { margin: 0 0 8px; color: var(--text-2); }
+
+/* Compact rows are paper content, with no small interactive targets inside the preview. */
+.print-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; }
+.print-group { min-width: 0; break-inside: avoid; }
+.print-group h3 { padding-bottom: 4px; border-bottom: 1px solid var(--seam); }
+.print-group ul { list-style: none; padding: 0; margin: 0; }
+.print-group li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding-block: 4px; border-bottom: 1px solid var(--seam); font-size: .8125rem; }
+.print-item-marks { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.print-rules { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; border-block: 1px solid var(--seam); }
+.print-rule { min-width: 0; padding: 8px; }
+.print-rule:first-child { padding-left: 0; }
+.print-rule:last-child { padding-right: 0; }
+.print-rule + .print-rule { border-left: 1px solid var(--seam); }
+.print-rule dd { margin: 8px 0 0; font-weight: 600; }
+.print-sheet-foot { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--seam); color: var(--text-2); font-size: .8125rem; }
+.print-sheet-foot p { margin: 0; }
+.print-site { color: var(--text); font-weight: 700; }
+
+@media (min-width: 880px) {
+  .print-toolbar button { width: auto; min-width: 160px; }
+}
+
+@page { size: letter; margin: 0.5in; }
+@media print {
+  :root { color-scheme: light; }
+  html, body { background: var(--print-white); }
+  body { margin: 0; }
+  .skip, #draft, #site, .print-toolbar, #foot, #actions { display: none !important; }
+  .print-preview-wrap { margin: 0; padding: 0; max-width: none; }
+  .print-preview { max-width: none; border: 0; background: var(--print-white); }
+  .print-sheet {
+    --print-paper: var(--print-white);
+    width: 100%;
+    min-height: 9.98in;
+    padding: 0;
+    zoom: 1;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .print-sheet, .print-sheet * { box-shadow: none; text-shadow: none; animation: none; transition: none; }
+  .print-section, .print-heading, .print-sheet-foot { break-inside: avoid; }
+  /* Longer languages (Spanish runs about 40% over English) must still fit one Letter page. */
+  .print-sheet { gap: 8px; }
+  .print-period { gap: 4px; padding-block: 6px; }
+  .print-group li { padding-block: 3px; }
+  .print-rule { padding-block: 6px; }
+}

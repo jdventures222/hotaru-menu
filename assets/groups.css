@@ -1,0 +1,54 @@
+/* Groups: one policy strip, then an estimate beside the planning checklist. */
+.groups-intro { max-width: 620px; margin: 16px 0 0; color: var(--text-2); }
+.groups-layout { display: grid; }
+.groups-layout > *, .estimate-body > * { min-width: 0; }
+.groups-intro, .groups-layout, .groups-rules { overflow-wrap: anywhere; }
+
+/* Native radios cover the whole key; selection is flat amber, never a light. */
+.estimate-body { gap: 16px; }
+.estimate-field { min-width: 0; margin: 0; padding: 0 0 16px; border: 0; border-bottom: 1px solid var(--seam); }
+.estimate-field legend { padding: 0; margin-bottom: 10px; }
+.estimate-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.estimate-options .estimate-choice { flex: 1; min-width: min-content; }
+.estimate-periods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.estimate-choice { position: relative; min-width: 0; }
+.estimate-choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.estimate-choice:has(input:checked) { border-color: var(--amber); background: #2c2119; }
+.estimate-choice:has(input:focus-visible) { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+/* A count stays in the text face; only prices use the shared segment readout. */
+.estimate-guests { display: grid; gap: 10px; }
+.estimate-stepper { display: grid; grid-template-columns: 52px minmax(44px, 1fr) 52px; gap: 10px; }
+.estimate-stepper button { font: inherit; cursor: pointer; }
+.estimate-stepper button:disabled { color: var(--text-2); cursor: default; }
+.estimate-stepper button:disabled:active { transform: none; }
+.estimate-stepper input {
+  min-width: 0; width: 100%; min-height: 52px; padding: 8px 10px;
+  border: 1px solid var(--seam-2); border-radius: 12px;
+  background: var(--key); color: var(--text);
+  font: 700 1.0625rem/1.5 var(--ui); font-stretch: 95%; text-align: center;
+  appearance: textfield;
+}
+.estimate-stepper input::-webkit-inner-spin-button, .estimate-stepper input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.estimate-result { display: grid; gap: 8px; padding-top: 16px; border-top: 1px solid var(--seam); }
+.estimate-unit { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-block: 12px; }
+.estimate-amount { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.estimate-each { margin-bottom: 8px; color: var(--text-2); }
+.estimate-total { row-gap: 12px; }
+.estimate-total .readout { color: var(--text); }
+.estimate-total .seg { font-size: 2.25rem; }
+
+.groups-plan-intro { margin: 0 0 16px; color: var(--text-2); }
+.groups-checklist li { flex-wrap: nowrap; align-items: baseline; gap: 12px; padding-block: 12px; }
+.groups-checklist svg { width: 22px; height: 22px; flex: none; align-self: flex-start; margin-top: 2px; color: var(--text-2); }
+.groups-contact { margin-top: 16px; padding-block: 10px; text-align: center; }
+
+@media (max-width: 359px) {
+  .estimate-options .estimate-choice { display: flex; flex-basis: 100%; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+  .estimate-periods { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 880px) {
+  .groups-rules { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .groups-layout { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+  #actions { width: calc(100% - 2 * var(--gutter)); margin-inline: max(var(--gutter), calc((100% - 1120px) / 2 + var(--gutter))) 0; }
+}

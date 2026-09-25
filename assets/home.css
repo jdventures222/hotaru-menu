@@ -1,0 +1,49 @@
+/* Home: the panel leads; the owner's spread shares its height on laptops. */
+.home-top { display: grid; grid-template-columns: minmax(0, 1fr); }
+.home-top > * { min-width: 0; }
+.home-tagline { margin: 16px 0 0; color: var(--text-2); }
+.home-offer {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--panel);
+  border: 1px solid var(--seam);
+  border-radius: var(--radius);
+  font-size: .9375rem;
+}
+.home-spread { margin-top: 16px; border: 1px solid var(--seam); border-radius: var(--radius); overflow: hidden; }
+.home-spread img { position: absolute; inset: 0; }
+.home-period-window { margin: 8px 0 0; }
+.home-panel { margin-top: 12px; overflow: visible; }
+.home-price { position: relative; padding-right: 24px; text-decoration: none; }
+.home-option { font-weight: 700; font-stretch: 112%; text-transform: uppercase; overflow-wrap: anywhere; }
+.home-chevron { width: 16px; height: 16px; flex: none; color: var(--text-2); }
+.home-price > .home-chevron { position: absolute; right: 0; top: calc(50% - 8px); }
+.home-menu-link { display: flex; align-items: center; min-height: 44px; padding-block: 8px; margin-top: 8px; }
+
+/* First-party words form one strip, with small line icons and hairline seams. */
+.home-promise { grid-template-columns: minmax(0, 1fr); }
+.home-promise-cell { grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 12px; }
+.home-drawing { display: flex; color: var(--text-3); }
+.home-drawing svg { width: 100%; height: 44px; }
+.home-drawing svg * { vector-effect: non-scaling-stroke; }
+.home-promise-cell .about { margin-top: 8px; }
+
+.home-more { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; background: var(--seam); border-block: 1px solid var(--seam); }
+.home-more-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px; background: var(--ground); text-decoration: none; }
+.home-more-link > span { min-width: 0; overflow-wrap: anywhere; }
+.home-more-title { display: block; font-weight: 700; font-stretch: 112%; }
+.home-more-link .about { display: block; margin-top: 8px; }
+@media (hover: hover) {
+  .home-price:hover, .home-more-link:hover { background: var(--key); }
+}
+
+@media (min-width: 880px) {
+  .home-top { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); column-gap: 32px; }
+  .home-top > .top, .home-offer, .home-prices { grid-column: 1; }
+  .home-spread { grid-column: 2; grid-row: 1 / 4; margin-top: 24px; aspect-ratio: auto; }
+  .home-promise, .home-more { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

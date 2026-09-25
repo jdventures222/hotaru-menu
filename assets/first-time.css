@@ -1,0 +1,44 @@
+/* One reading column; shared panels, keys and rules keep the Burner Panel finish. */
+.first-time-guide { max-width: calc(760px + 2 * var(--gutter)); overflow-wrap: anywhere; }
+.first-time-intro { margin: 16px 0 0; color: var(--text-2); }
+.steps { display: grid; gap: 12px; list-style: none; margin: 0; padding: 0; }
+.step-head { display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 12px; }
+.step-head h2 { margin: 0; }
+.step-number {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  background: var(--key);
+  border: 1px solid var(--seam-2);
+  border-radius: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.step-text { margin: 0; }
+
+/* Facts are rows in the glass, with a seam above each answer. */
+.step-facts { margin: 0; }
+.step-fact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  min-height: 44px;
+  padding-block: 8px;
+  border-top: 1px solid var(--seam);
+}
+.step-fact dd { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-weight: 600; }
+
+/* Keep the small menu links on laptops too; their content determines when to wrap. */
+.step-options { border-top: 1px solid var(--seam); padding-top: 12px; }
+.step-options .nowline { margin-top: 0; }
+.step-hours { margin: 8px 0 0; }
+.step-options .keys { display: flex; flex-wrap: wrap; }
+.step-options .key { flex: 1 1 88px; overflow-wrap: normal; }
+.step-options .kprice { white-space: nowrap; }
+.step-key-price { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+@media (min-width: 880px) {
+  .first-time-guide { max-width: 1120px; }
+  .first-time-guide > * { max-width: 760px; }
+}

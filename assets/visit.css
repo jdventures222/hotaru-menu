@@ -1,0 +1,34 @@
+/* Visit: one-thumb actions and seam-divided facts; the shared components keep their type. */
+.visit-layout, .visit-arrival { min-width: 0; }
+.visit-layout { display: grid; grid-template-columns: minmax(0, 1fr); }
+.visit-address { font-style: normal; font-weight: 600; color: var(--text); }
+.visit-directions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.visit-directions span { overflow-wrap: anywhere; }
+.visit-fact { font-weight: 600; }
+
+/* A definition list lets each day's price periods use the full row on a narrow phone. */
+.visit-week {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--seam);
+  border-radius: var(--radius);
+}
+.visit-day {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  min-height: 72px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--seam);
+}
+.visit-day:first-child { border-top: 0; }
+.visit-day dt { font-weight: 600; overflow-wrap: anywhere; }
+.visit-day dd { margin: 0; }
+.visit-opening { text-align: end; font-weight: 600; }
+.visit-periods { grid-column: 1 / -1; overflow-wrap: anywhere; }
+.visit-today { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+
+@media (min-width: 880px) {
+  .visit-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+  #actions { display: none; }
+}
