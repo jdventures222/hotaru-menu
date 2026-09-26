@@ -2,9 +2,11 @@
 .visit-layout, .visit-arrival { min-width: 0; }
 .visit-layout { display: grid; grid-template-columns: minmax(0, 1fr); }
 .visit-address { font-style: normal; font-weight: 600; color: var(--text); }
+.visit-arrival #status { flex-wrap: wrap; }
 .visit-directions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .visit-directions span { overflow-wrap: anywhere; }
 .visit-fact { font-weight: 600; }
+.visit-prices { margin-top: 12px; }
 
 /* A definition list lets each day's price periods use the full row on a narrow phone. */
 .visit-week {

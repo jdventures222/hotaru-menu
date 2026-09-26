@@ -6,18 +6,16 @@
   --print-faint: var(--text-2);
   --print-outline: var(--text-3);
   --print-paper: var(--text);
-  --print-white: rgb(255 255 255);
 }
 
 #actions { display: none; }
 body, body:has(.actions > :nth-child(3)) { padding-bottom: 0; }
-.print-toolbar { padding-top: 30px; }
+.print-toolbar { padding-top: 32px; }
 .print-toolbar p { margin: 12px 0 16px; color: var(--text-2); }
 .print-toolbar button { width: 100%; font-family: var(--ui); font-size: 1.0625rem; cursor: pointer; }
-.print-preview-wrap { margin-top: 30px; }
+.print-preview-wrap { margin-top: 32px; }
 .print-preview {
   width: 100%;
-  max-width: calc(8.5in + 2px);
   margin-inline: auto;
   border: 1px solid var(--seam);
   background: var(--print-paper);
@@ -32,25 +30,25 @@ body, body:has(.actions > :nth-child(3)) { padding-bottom: 0; }
   --unlit: var(--print-ink);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 8.5in;
-  min-height: 11in;
-  padding: .5in;
-  zoom: var(--preview-scale, 1);
+  gap: 44px;
+  width: 100%;
+  min-width: 0;
+  padding: 16px;
   background: var(--print-paper);
   color: var(--text);
   color-scheme: light;
-  font-size: .9375rem;
-  line-height: 1.35;
+  font-size: 1.0625rem;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 .print-sheet .readout .lit { color: var(--print-ink); }
 .print-heading p { margin: 0; }
 .print-name { font-size: 1.625rem; line-height: 1.1; }
 .print-contact { padding-top: 8px; color: var(--text-2); }
-.print-hours { display: flex; align-items: baseline; gap: 12px; padding-top: 8px; }
+.print-hours { display: grid; gap: 8px; padding-top: 16px; }
 .print-hours h2 { flex: none; }
-.print-hours ul { display: flex; flex-wrap: wrap; gap: 8px 16px; list-style: none; padding: 0; margin: 0; }
+.print-hours ul { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.print-hours li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
 .print-section { min-width: 0; }
 .print-section h2 {
   margin: 0 0 8px;
@@ -63,54 +61,67 @@ body, body:has(.actions > :nth-child(3)) { padding-bottom: 0; }
 .print-section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
 .print-section-head p { margin: 0 0 8px; color: var(--text-2); }
 
-/* Equal columns keep the combined option as prominent as the other two. */
-.print-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--seam); }
+/* Stack at reading size on phones. Every option has the same inset. */
+.print-options { display: grid; grid-template-columns: minmax(0, 1fr); border-block: 1px solid var(--seam); }
 .print-option { min-width: 0; padding: 12px; }
-.print-option:first-child { padding-left: 0; }
-.print-option:last-child { padding-right: 0; }
-.print-option + .print-option { border-left: 1px solid var(--seam); }
-.print-option-name { display: flex; flex-direction: column; align-items: start; gap: 8px; min-height: 64px; padding-bottom: 8px; }
+.print-option + .print-option { border-top: 1px solid var(--seam); }
+.print-option-name { display: flex; flex-direction: column; align-items: start; gap: 8px; padding-bottom: 8px; }
 .print-option h3 { font-size: 1.625rem; font-weight: 800; font-stretch: 112%; line-height: 1.1; letter-spacing: .02em; text-transform: uppercase; }
-.print-period { display: flex; flex-direction: column; align-items: start; gap: 8px; padding-block: 8px; }
+.print-period { display: grid; gap: 8px; padding-block: 12px; }
 .print-period + .print-period { border-top: 1px solid var(--seam); }
-.print-period-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; width: 100%; min-height: 24px; }
+.print-period-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px; min-width: 0; }
+.print-price { display: grid; justify-items: end; gap: 4px; }
+.print-period .ptime { display: grid; align-content: start; justify-items: start; gap: 4px; font-size: .9375rem; line-height: 1.5; }
 .print-note { margin: 0 0 8px; color: var(--text-2); }
 
-/* Compact rows are paper content, with no small interactive targets inside the preview. */
-.print-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; }
+/* Normal item text on screen; the compact paper rows live only in print media. */
+.print-groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .print-group { min-width: 0; break-inside: avoid; }
 .print-group h3 { padding-bottom: 4px; border-bottom: 1px solid var(--seam); }
 .print-group ul { list-style: none; padding: 0; margin: 0; }
-.print-group li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding-block: 4px; border-bottom: 1px solid var(--seam); font-size: .8125rem; }
+.print-group li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; min-height: 46px; padding-block: 8px; border-bottom: 1px solid var(--seam); }
 .print-item-marks { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; }
-.print-rules { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; border-block: 1px solid var(--seam); }
-.print-rule { min-width: 0; padding: 8px; }
-.print-rule:first-child { padding-left: 0; }
-.print-rule:last-child { padding-right: 0; }
-.print-rule + .print-rule { border-left: 1px solid var(--seam); }
+.print-rules { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; border-block: 1px solid var(--seam); }
+.print-rule { min-width: 0; padding: 12px; }
+.print-rule + .print-rule { border-top: 1px solid var(--seam); }
 .print-rule dd { margin: 8px 0 0; font-weight: 600; }
-.print-sheet-foot { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--seam); color: var(--text-2); font-size: .8125rem; }
+.print-sheet-foot { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--seam); color: var(--text-2); font-size: .9375rem; }
 .print-sheet-foot p { margin: 0; }
 .print-site { color: var(--text); font-weight: 700; }
 
 @media (min-width: 880px) {
-  .print-toolbar button { width: auto; min-width: 160px; }
+  .print-toolbar button { width: auto; }
+  .print-sheet { padding: 32px; }
+}
+
+/* Subgrid shares the name, price and hours tracks through the semantic articles/lists.
+   A wrapped note or unknown-price pill grows the same track in all three columns. */
+@media (min-width: 880px), print {
+  .print-options { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(var(--print-option-rows), auto); }
+  .print-option { display: grid; grid-template-rows: subgrid; grid-row: 1 / -1; }
+  .print-option + .print-option { border-top: 0; border-left: 1px solid var(--seam); }
+  .print-option .rows { display: grid; grid-template-rows: subgrid; grid-row: 2 / -1; }
+  .print-period { grid-template-rows: subgrid; grid-row: var(--print-period-row) / span 2; }
+  .print-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .print-rules { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .print-rule + .print-rule { border-top: 0; border-left: 1px solid var(--seam); }
 }
 
 @page { size: letter; margin: 0.5in; }
 @media print {
   :root { color-scheme: light; }
-  html, body { background: var(--print-white); }
+  html, body { background: none; }
   body { margin: 0; }
   .skip, #draft, #site, .print-toolbar, #foot, #actions { display: none !important; }
   .print-preview-wrap { margin: 0; padding: 0; max-width: none; }
-  .print-preview { max-width: none; border: 0; background: var(--print-white); }
+  .print-preview { border: 0; background: none; }
   .print-sheet {
-    --print-paper: var(--print-white);
     width: 100%;
     min-height: 9.98in;
     padding: 0;
-    zoom: 1;
+    background: none;
+    font-size: .9375rem;
+    line-height: 1.35;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
@@ -118,7 +129,24 @@ body, body:has(.actions > :nth-child(3)) { padding-bottom: 0; }
   .print-section, .print-heading, .print-sheet-foot { break-inside: avoid; }
   /* Longer languages (Spanish runs about 40% over English) must still fit one Letter page. */
   .print-sheet { gap: 8px; }
-  .print-period { gap: 4px; padding-block: 6px; }
-  .print-group li { padding-block: 3px; }
-  .print-rule { padding-block: 6px; }
+  .print-contact { padding-top: 4px; }
+  .print-hours { display: flex; align-items: baseline; gap: 12px; padding-top: 4px; }
+  .print-hours ul { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+  .print-section h2, .print-section-head p, .print-note { margin-bottom: 4px; }
+  .print-option { padding-block: 4px; }
+  .print-option-name { padding-bottom: 4px; }
+  .print-period { gap: 4px; padding-block: 4px; }
+  /* Wrap only between complete localized units; the pill can share the last line.
+     These spans are ordinary inline text on screen, preserving its existing layout. */
+  .print-period .ptime { display: block; font-size: .875rem; line-height: 1.35; }
+  .print-schedule-unit { white-space: nowrap; }
+  .print-groups { gap: 8px 16px; }
+  .print-group li { min-height: 0; row-gap: 0; padding-block: 2px; font-size: .8125rem; }
+  /* Mixing options has the longest label in every language; give it two tracks
+     without adding a second row or shrinking any label, answer or pill. */
+  .print-rules { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .print-rule[data-rule="mix"] { grid-column: span 2; }
+  .print-rule { padding: 4px 8px; }
+  .print-rule dd { margin-top: 4px; }
+  .print-sheet-foot { padding-top: 4px; font-size: .8125rem; }
 }

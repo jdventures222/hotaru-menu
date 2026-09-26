@@ -1,7 +1,7 @@
 /* The Visit page: directions and calling first, arrival notes, then the full week.
    Only the status and today's marker follow the restaurant's clock. */
 (() => {
-  const { D, tr, ui, esc, $, tbc, span, dayName, days, clock, periodsOn, hoursOn, openState, icon } = Hotaru;
+  const { D, tr, ui, esc, $, tbc, span, dayName, days, clock, periodsOn, hoursOn, openState, icon, href } = Hotaru;
   const P = D.pages.visit, R = D.restaurant;
   const WEEK = [1, 2, 3, 4, 5, 6, 0];
   let lastStatus;
@@ -26,7 +26,8 @@
       `${P.parking.value ? esc(tr(P.parking.value)) + " " : ""}${tbc({ confirmed: P.parking.value != null && P.parking.confirmed === true })}</span></li></ul>`;
 
     $("hours-h").innerHTML = `${esc(ui("hours"))} ` +
-      tbc({ confirmed: [...D.hours, ...D.periods].every(h => h.confirmed === true) });
+      tbc({ confirmed: [...D.hours, ...D.periods].every(h => h.confirmed === true) }, "hoursTbc");
+    $("visit-prices").innerHTML = `<a class="btn" href="${esc(href("menu") + "#prices")}">${esc(tr(P.seePrices))}</a>`;
     $("hours").innerHTML = WEEK.map(d => {
       const h = hoursOn(d);
       const periods = periodsOn(d).map(p => tr(P.periodHours, { period: tr(p.name), hours: span(p.start, p.end) }))
@@ -46,7 +47,7 @@
     const c = clock(), o = openState(c), h = hoursOn(c.day);
     const status = `<span class="status"><span class="led${o.open ? " on" : ""}" aria-hidden="true"></span>` +
       `<strong>${esc(o.text)}</strong>${h ? `<span>${esc(tr(P.dayHours, { day: ui("today"), hours: span(h.open, h.close) }))}</span>` : ""}</span>` +
-      tbc({ confirmed: [h, o.quoted].every(x => x && x.confirmed === true) });
+      tbc({ confirmed: [h, o.quoted].every(x => x && x.confirmed === true) }, "hoursTbc");
     // An unchanged 30-second tick must not repeat the live-region announcement.
     if (status !== lastStatus) { $("status").innerHTML = status; lastStatus = status; }
 
@@ -63,7 +64,7 @@
   function still() {
     $("status").innerHTML = `<span class="status"><span class="led" aria-hidden="true"></span><span>` +
       D.hours.map(h => esc(tr(P.dayHours, { day: days(h.days), hours: span(h.open, h.close) }))).join("<br>") +
-      `</span></span>${tbc({ confirmed: D.hours.every(h => h.confirmed === true) })}`;
+      `</span></span>${tbc({ confirmed: D.hours.every(h => h.confirmed === true) }, "hoursTbc")}`;
   }
 
   Hotaru.boot({ page: "visit", render, tick, still });

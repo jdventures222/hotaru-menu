@@ -1,4 +1,4 @@
-/* Home: the panel leads; the owner's spread shares its height on laptops. */
+/* Home: prices lead on phones; only a real photo stretches beside the panel. */
 .home-top { display: grid; grid-template-columns: minmax(0, 1fr); }
 .home-top > * { min-width: 0; }
 .home-tagline { margin: 16px 0 0; color: var(--text-2); }
@@ -15,10 +15,14 @@
   font-size: .9375rem;
 }
 .home-spread { margin-top: 16px; border: 1px solid var(--seam); border-radius: var(--radius); overflow: hidden; }
+.home-spread-placeholder { align-self: start; aspect-ratio: 2 / 1; max-height: 280px; }
 .home-spread img { position: absolute; inset: 0; }
 .home-period-window { margin: 8px 0 0; }
 .home-panel { margin-top: 12px; overflow: visible; }
 .home-price { position: relative; padding-right: 24px; text-decoration: none; }
+.home-price.is-unavailable { grid-template-columns: 10px minmax(0, 1fr); row-gap: 8px; }
+.home-price.is-unavailable .price { grid-column: 2; justify-items: start; }
+.home-unavailable { color: var(--text-2); font-size: .9375rem; overflow-wrap: anywhere; }
 .home-option { font-weight: 700; font-stretch: 112%; text-transform: uppercase; overflow-wrap: anywhere; }
 .home-chevron { width: 16px; height: 16px; flex: none; color: var(--text-2); }
 .home-price > .home-chevron { position: absolute; right: 0; top: calc(50% - 8px); }
@@ -44,6 +48,7 @@
 @media (min-width: 880px) {
   .home-top { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); column-gap: 32px; }
   .home-top > .top, .home-offer, .home-prices { grid-column: 1; }
-  .home-spread { grid-column: 2; grid-row: 1 / 4; margin-top: 24px; aspect-ratio: auto; }
+  .home-spread { grid-column: 2; grid-row: 1; margin-top: 24px; }
+  .home-spread:not(.home-spread-placeholder) { grid-row: 1 / 4; aspect-ratio: auto; }
   .home-promise, .home-more { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

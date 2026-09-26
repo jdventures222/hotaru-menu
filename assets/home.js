@@ -1,8 +1,8 @@
 /* The Home page: the spread, current prices and a quick way to the table.
    Shared components and the restaurant's clock come from core.js. */
 (() => {
-  const { D: M, tr, ui, esc, $, tbc, time, span, days, clock, hoursOn,
-          priceState, dayWord, openState, readout, ART, href, promoLive } = Hotaru;
+  const { D: M, tr, ui, esc, $, tbc, span, days, clock, hoursOn, periodSchedule,
+          priceState, priceText, mainPriceText, openState, readout, ART, href, promoLive } = Hotaru;
   const H = M.pages.home;
   const priceMarkup = new WeakMap();
   const chevron = `<svg class="home-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>`;
@@ -16,6 +16,7 @@
       `<p class="home-tagline">${esc(tr(H.tagline))}</p><ul class="meta"><li id="status"></li></ul>`;
 
     $("offer").innerHTML = `<span class="led on" aria-hidden="true"></span><span>${esc(tr(M.promo && M.promo.text))} ${M.promo ? tbc(M.promo) : ""}</span>`;
+    $("spread").classList.toggle("home-spread-placeholder", !H.spread.photo);
     $("spread").innerHTML = H.spread.photo
       ? `<img src="${esc(H.spread.photo)}" alt="${esc(tr(H.spread.alt))}">`
       : `${ART.both()}<span class="label">${esc(ui("photoComing"))}</span>`;
@@ -25,7 +26,7 @@
       `<li><a class="row home-price" href="${esc(href("menu"))}#card-${esc(o.id)}" aria-describedby="nowline price-window">` +
       `<span class="led" aria-hidden="true"></span><span class="home-option">${esc(tr(o.name))}</span>` +
       `<span class="price"></span>${chevron}</a></li>`).join("");
-    $("menu-link").href = href("menu");
+    $("menu-link").href = href("menu") + "#included";
     $("menu-link").textContent = tr(H.prices);
 
     $("promise-h").textContent = tr(H.promiseHeading);
@@ -43,16 +44,14 @@
     $("home-prices").append($("actions"));
   }
 
-  function confirmedPrice(p, price) {
-    return p && p.confirmed === true && price && price.amount != null && price.confirmed === true;
-  }
-
   function showPrices(p, next, live) {
-    $("price-window").textContent = p ? tr(H.periodWindow, { days: days(p.days), hours: span(p.start, p.end) }) : "";
+    $("price-window").textContent = p ? periodSchedule(p, H.periodWindow) : "";
     $("price-window").hidden = !p;
     $("prices").querySelectorAll(".row").forEach((r, i) => {
       const price = p && M.options[i].prices[p.id];
-      const markup = price ? readout(price) : "";
+      const unavailable = !!p && !price;
+      const markup = price ? readout(price) + tbc(price)
+        : unavailable ? `<span class="home-unavailable">${esc(ui("notOffered"))}</span>` : "";
       const value = r.querySelector(".price");
       // Keep the digits and link intact on ordinary ticks: no repeated power-on or lost focus.
       if (priceMarkup.get(value) !== markup) {
@@ -60,8 +59,9 @@
         priceMarkup.set(value, markup);
       }
       r.dataset.period = p ? p.id : "";
-      r.classList.toggle("is-lit", live);
-      r.classList.toggle("is-next", next);
+      r.classList.toggle("is-unavailable", unavailable);
+      r.classList.toggle("is-lit", live && !!price);
+      r.classList.toggle("is-next", next && !!price);
     });
   }
 
@@ -70,20 +70,16 @@
     const c = clock(), s = priceState(c), o = openState(c), h = hoursOn(c.day);
     $("status").innerHTML = `<span class="status"><span class="led${o.open ? " on" : ""}" aria-hidden="true"></span>` +
       `<strong>${esc(o.text)}</strong>${h ? `<span>${esc(tr(H.hoursLine, { day: ui("today"), hours: span(h.open, h.close) }))}</span>` : ""}</span>` +
-      tbc({ confirmed: !!o.quoted && [h, o.quoted].every(x => !x || x.confirmed === true) });
+      tbc({ confirmed: !!o.quoted && [h, o.quoted].every(x => !x || x.confirmed === true) }, "hoursTbc");
     $("offer").hidden = !promoLive();
 
     if (!s) {
-      $("nowline").innerHTML = `<span class="led" aria-hidden="true"></span><span>${tbc({ confirmed: false })}</span>`;
+      $("nowline").innerHTML = `<span class="led" aria-hidden="true"></span><span>${tbc({ confirmed: false }, "hoursTbc")}</span>`;
       showPrices(null, false, false);
       return;
     }
-    const name = tr(s.period.name);
-    $("nowline").innerHTML = `<span class="led${s.next ? "" : " on"}" aria-hidden="true"></span><span>${esc(
-      !s.next ? ui("nowPrice", { period: name })
-      : s.off === 0 ? ui("nextPrice", { period: name, time: time(s.period.start) })
-      : ui("nextPriceDay", { period: name, time: time(s.period.start), day: dayWord(s.off, s.d) }))} ` +
-      `${tbc({ confirmed: M.options.every(o => !o.prices[s.period.id] || confirmedPrice(s.period, o.prices[s.period.id])) })}</span>`;
+    $("nowline").innerHTML = `<span class="led${s.next ? "" : " on"}" aria-hidden="true"></span><span>${esc(priceText(s))} ` +
+      `${tbc(s.period, "hoursTbc")}</span>`;
     showPrices(s.period, s.next, !s.next);
   }
 
@@ -92,10 +88,9 @@
     const main = [...M.periods].sort((a, b) => b.days.length - a.days.length)[0];
     $("status").innerHTML = `<span class="status"><span class="led" aria-hidden="true"></span><span>` +
       M.hours.map(h => esc(tr(H.hoursLine, { day: days(h.days), hours: span(h.open, h.close) }))).join("<br>") +
-      `</span></span>${tbc({ confirmed: M.hours.length > 0 && M.hours.every(h => h.confirmed === true) })}`;
+      `</span></span>${tbc({ confirmed: M.hours.length > 0 && M.hours.every(h => h.confirmed === true) }, "hoursTbc")}`;
     $("nowline").innerHTML = `<span class="led" aria-hidden="true"></span><span>` +
-      (main ? esc(ui("mainPrice", { period: tr(main.name) })) + " " : "") +
-      `${tbc({ confirmed: M.options.every(o => !(main && o.prices[main.id]) || confirmedPrice(main, o.prices[main.id])) })}</span>`;
+      `${esc(mainPriceText(main))} ${tbc(main ? periodSchedule(main, undefined, { details: true }) : { confirmed: false }, "hoursTbc")}</span>`;
     showPrices(main, false, false);
   }
 

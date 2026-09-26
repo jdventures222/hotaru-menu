@@ -1,7 +1,7 @@
-/* The printable menu: one Letter sheet, scaled down for the screen. The same markup
-   prints with every provisional label intact. Shared helpers come from core.js. */
+/* The printable menu: responsive paper on screen, one Letter sheet in print. The same
+   markup keeps every provisional label intact. Shared helpers come from core.js. */
 (() => {
-  const { D: M, L, tr, ui, esc, $, tbc, mark, span, days, readout, facts } = Hotaru;
+  const { D: M, L, tr, ui, esc, $, tbc, mark, itemChips, span, days, periodSchedule, readout, facts } = Hotaru;
   const P = M.pages.print;
 
   /* ---- the sheet has no live prices: every period keeps its own days and hours ---- */
@@ -17,7 +17,7 @@
         line1: R.address.line1, line2: R.address.line2, phone: R.phone.display,
       }))} ${tbc({ confirmed: R.address.confirmed === true && R.phone.confirmed === true })}</p>` +
       `<div class="print-hours"><h2 class="label">${esc(ui("hours"))}</h2><ul>` +
-      M.hours.map(h => `<li>${esc(tr(P.schedule, { days: days(h.days), hours: span(h.open, h.close) }))} ${tbc(h)}</li>`).join("") +
+      M.hours.map(h => `<li><span>${esc(tr(P.schedule, { days: days(h.days), hours: span(h.open, h.close) }))}</span>${tbc(h, "hoursTbc")}</li>`).join("") +
       `</ul></div>`;
 
     $("options-h").textContent = ui("pickOne");
@@ -25,35 +25,34 @@
     $("included-h").textContent = ui("included");
     $("rules-h").textContent = ui("rules");
 
+    // One shared name track, then a price track and an hours track for every period.
+    // Explicit period positions keep later rows aligned even when an option omits a price.
+    $("print-options").style.setProperty("--print-option-rows", String(1 + M.periods.length * 2));
     $("print-options").innerHTML = M.options.map(o =>
       `<article class="print-option" aria-labelledby="option-${esc(o.id)}">` +
       `<div class="print-option-name"><h3 id="option-${esc(o.id)}">${esc(tr(o.name))}</h3>${tbc(o)}</div>` +
-      `<ul class="rows">` + M.periods.filter(p => o.prices[p.id]).map(p => {
+      `<ul class="rows">` + M.periods.map((p, i) => {
         const price = o.prices[p.id];
-        return `<li class="print-period"><div class="print-period-head"><span class="label">${esc(tr(p.name))}</span>` +
-          `${readout(price)}</div>` +
-          `<span class="ptime">${esc(tr(P.schedule, { days: days(p.days), hours: span(p.start, p.end) }))} ` +
-          `${tbc({ confirmed: price.amount != null && price.confirmed === true && p.confirmed === true })}</span></li>`;
+        if (!price) return "";
+        const schedule = periodSchedule(p, P.schedule, { details: true });
+        const scheduleHTML = schedule.parts.map(part => part.type === "element"
+          ? `<span class="print-schedule-unit">${esc(part.value)}</span>` : esc(part.value)).join("");
+        return `<li class="print-period" style="--print-period-row: ${esc(1 + i * 2)}"><div class="print-period-head"><span class="label">${esc(tr(p.name))}</span>` +
+          `<span class="print-price">${readout(price)}${tbc(price)}</span></div>` +
+          `<span class="ptime"><span class="print-schedule">${scheduleHTML}</span> ` +
+          `${tbc(schedule, "hoursTbc")}</span></li>`;
       }).join("") + `</ul></article>`).join("");
 
-    // Match the Menu's base-option chips and sample labels.
-    const chips = it => {
-      if (M.options.every(o => it.in.includes(o.id))) return "";
-      const has = M.options.filter(o => it.in.includes(o.id));
-      const bases = has.filter(o => !o.combines);
-      return (bases.length ? bases : has).map(o =>
-        `<span class="chip"><span class="vh">${esc(ui("onlyWith"))} </span>${esc(tr(o.short))}</span>`).join("");
-    };
     $("sample-note").hidden = !M.groups.some(g => g.items.some(it => it.sample));
     $("sample-note").textContent = ui("sampleNote");
     $("print-groups").innerHTML = M.groups.map(g =>
       `<div class="print-group"><h3 class="label">${esc(tr(g.name))}</h3><ul>` +
       g.items.map(it => `<li${it.sample ? ' class="sample"' : ""}><span class="iname">${esc(tr(it.name))}</span>` +
-        `<span class="print-item-marks">${chips(it)}${mark(it)}</span></li>`).join("") +
+        `<span class="print-item-marks">${itemChips(it)}${mark(it)}</span></li>`).join("") +
       `</ul></div>`).join("");
 
     $("print-rules").innerHTML = M.rules.map(r =>
-      `<div class="print-rule"><dt class="label">${esc(tr(r.name))}</dt>` +
+      `<div class="print-rule" data-rule="${esc(r.id)}"><dt class="label">${esc(tr(r.name))}</dt>` +
       `<dd>${r.value ? esc(tr(r.value)) + " " : ""}${tbc({ confirmed: r.value != null && r.confirmed === true })}</dd></div>`).join("");
 
     // Keep this notice identical to the top strip, including an unreviewed language.
@@ -64,13 +63,8 @@
       (notice ? `<p>${esc(notice)}</p>` : "");
   }
 
-  /* ---- fit the paper to the preview; printing always restores its physical size ---- */
+  /* ---- let the browser reflow and zoom; wait for the readout fonts before printing ---- */
   function wire() {
-    const preview = $("print-preview"), sheet = $("print-sheet");
-    const fit = () => sheet.style.setProperty("--preview-scale", Math.min(1, preview.clientWidth / sheet.offsetWidth));
-    fit();
-    const observer = new ResizeObserver(fit);
-    observer.observe(preview);
     $("print-button").addEventListener("click", async () => {
       await document.fonts.ready;
       window.print();
