@@ -1,97 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0e0a08">
-<meta name="robots" content="noindex, nofollow">
-<script src="../assets/guard.js"></script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0a08'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ffb13d'/%3E%3C/svg%3E">
-<title>Hotaru Shabu &amp; Grill · Printable menu</title>
-<meta name="description" content="Concept preview: a one-page printable menu for Hotaru Shabu &amp; Grill.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Hotaru Shabu &amp; Grill">
-<meta property="og:title" content="Hotaru Shabu &amp; Grill · Printable menu">
-<meta property="og:description" content="Concept preview: a one-page printable menu for Hotaru Shabu &amp; Grill.">
-<meta property="og:url" content="https://hotaru.fyt.life/print/">
-<meta property="og:image" content="https://hotaru.fyt.life/assets/share.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Hotaru Shabu &amp; Grill: shabu, grill or both, all you can eat, in Tustin">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="../assets/fonts/saira.subset.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/dseg7-bold.subset.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/site.css">
-<link rel="stylesheet" href="../assets/print.css">
-</head>
-<body data-root="../">
-<a class="skip" href="#main"></a>
-<div class="draft" id="draft" hidden><div class="wrap"><span class="ring" aria-hidden="true"></span><span id="draft-text"></span></div></div>
-<div class="site" id="site"></div>
-<main id="main">
-  <!-- Static English copy of data.js; tests/fallback.test.mjs guards against drift. -->
-  <div class="fallback" id="fallback" lang="en">
-    <div class="fallback-notice">
-      <div class="wrap">
-        <p>Concept preview. Not Hotaru&#39;s official menu.</p>
-        <p>Draft: some details are still to be confirmed</p>
-      </div>
-    </div>
-    <div class="wrap fallback-content">
-      <h1>Hotaru Shabu &#38; Grill</h1>
-      <p data-fact="address">1056 Walnut Ave, Tustin, CA 92780</p>
-      <p><a data-fact="phone" href="tel:+16572321441">(657) 232-1441</a></p>
-      <nav class="fallback-links" aria-label="Pages">
-        <a href="../">Home</a>
-        <a href="../menu/">Menu</a>
-        <a href="../first-time/">First time here?</a>
-        <a href="../groups/">Groups</a>
-        <a href="../visit/">Visit</a>
-        <a href="../print/">Printable menu</a>
-      </nav>
-      <table class="fallback-prices">
-        <caption>Prices per adult</caption>
-        <thead><tr><th scope="col">Options</th><th scope="col" aria-describedby="fallback-lunch-hours">Lunch</th><th scope="col" aria-describedby="fallback-dinner-hours">Dinner</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Shabu</th><td data-price="shabu.lunch">$39.95</td><td data-price="shabu.dinner">$49.95</td></tr>
-          <tr><th scope="row">Grill</th><td data-price="grill.lunch">$39.95</td><td data-price="grill.dinner">$49.95</td></tr>
-          <tr><th scope="row">Shabu + Grill</th><td data-price="both.lunch"><span class="tbc">to confirm</span></td><td data-price="both.dinner">$49.99</td></tr>
-        </tbody>
-      </table>
-      <p class="fallback-hours" id="fallback-lunch-hours"><strong>Lunch</strong> <span>Sat–Sun · 11 AM – 4 PM</span> <span class="tbc">hours to confirm</span></p>
-      <p class="fallback-hours" id="fallback-dinner-hours"><strong>Dinner</strong> <span>Daily · 4 – 11 PM</span> <span class="tbc">hours to confirm</span></p>
-    </div>
-  </div>
-  <header class="top wrap print-toolbar" id="print-toolbar"></header>
-  <div class="wrap print-preview-wrap">
-    <div class="print-preview" id="print-preview">
-      <article class="print-sheet" id="print-sheet" aria-labelledby="sheet-name">
-        <header class="print-heading" id="print-heading"></header>
-        <section class="print-section" aria-labelledby="options-h">
-          <div class="print-section-head"><h2 id="options-h"></h2><p id="prices-note"></p></div>
-          <div class="print-options" id="print-options"></div>
-        </section>
-        <section class="print-section" aria-labelledby="included-h">
-          <h2 id="included-h"></h2>
-          <p class="print-note" id="sample-note" hidden></p>
-          <div class="print-groups" id="print-groups"></div>
-        </section>
-        <section class="print-section" aria-labelledby="rules-h">
-          <h2 id="rules-h"></h2>
-          <dl class="print-rules" id="print-rules"></dl>
-        </section>
-        <footer class="print-sheet-foot" id="print-sheet-foot"></footer>
-      </article>
-    </div>
-  </div>
-</main>
-<div class="actions" id="actions"></div>
-<footer class="foot" id="foot"></footer>
-<script src="../assets/data.js"></script>
-<script src="../assets/core.js"></script>
-<script src="../assets/print.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-LS5/uDeJg1ZkSFlctNpvPGL8FBczostH6okluVGFAF4='; style-src 'self' 'sha256-3OEkfPx5P1AenzToW4V8Ik+obOzl53dLIxCFrWlEOR4='; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><title>Printable menu</title><style>@font-face{font-family:Saira;src:url('/assets/fonts/saira.subset.woff2') format('woff2');font-weight:400 800;font-stretch:75% 125%;font-display:swap}@font-face{font-family:DSEG7;src:url('/assets/fonts/dseg7-bold.subset.woff2') format('woff2');font-weight:700;font-display:block}
+:root{--ink:#1d1206;--secondary:#54433a;--edge:#a08a76;--paper:#f5ebdf;color-scheme:light;font-family:Saira,system-ui,sans-serif;color:var(--ink);background:var(--paper)}*{box-sizing:border-box}body{margin:0}.print-toolbar{max-width:760px;margin:auto;display:flex;flex-wrap:wrap;gap:8px;padding:12px}.print-toolbar a{color:var(--ink);min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;padding:8px;border:1px solid var(--secondary);border-radius:8px}a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}.print-sheet{width:100%;max-width:720px;margin:auto;padding:16px;font-size:13px;line-height:1.35;display:grid;gap:10px}h1,h2,h3,p,dl,dd,ul{margin:0}h1{font-size:23px;font-stretch:122%;line-height:1.15}h2{font-size:16px;font-stretch:112%;margin-bottom:4px;text-transform:uppercase}h3{font-size:13px;font-stretch:85%}header>p{margin-top:4px}.print-hours{margin-top:4px;display:flex;flex-wrap:wrap;gap:3px 12px;font-size:12px}.print-hours>span{display:inline-block}.print-prices{width:100%;border-collapse:collapse}.print-prices th,.print-prices td{padding:5px 8px;text-align:left;border-bottom:1px solid var(--edge)}.print-prices th{font-weight:650}.print-prices td{width:28%}.print-periods{font-size:12px;margin-top:5px;display:grid;gap:3px}.print-periods .tbc{white-space:normal}.readout{display:inline-flex;gap:3px;align-items:center}.seg{display:inline-grid;font:700 19px/1 DSEG7,monospace}.ghost,.lit{grid-area:1/1}.ghost{color:#cfbca9}.lit{color:var(--ink)}.cur{font:700 11px/1 Saira,system-ui;align-self:start}.dp{font:800 1em/1 Saira,system-ui}.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.tbc{display:inline-block;font-size:10px;line-height:1.2;padding:1px 4px;border:1px dashed var(--secondary);border-radius:12px;color:var(--secondary);vertical-align:middle}.sample-note{font-size:11px;margin-bottom:6px}.included-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 14px}.included-group h3{border-bottom:1px solid var(--edge);padding-bottom:3px}.included-group ul{padding:0;list-style:none}.included-group li{padding:4px 0;border-bottom:1px solid #cfbca9;font-size:12px}.marks{display:flex;flex-wrap:wrap;gap:3px;margin-top:2px}.chip{font-size:9px;line-height:1.2;border:1px solid var(--secondary);border-radius:12px;padding:1px 4px;font-stretch:85%}.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px 12px}.fact{border-top:1px solid var(--edge);padding-top:4px}.fact dt{font-size:11px;font-weight:650}.fact dd{margin-top:3px}footer{border-top:1px solid var(--edge);padding-top:5px;font-size:11px;line-height:1.3}footer>p:first-child{font-weight:650}footer>p+p{margin-top:2px}:root:lang(zh){font-family:Saira,'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',system-ui,sans-serif}:root:lang(ko){font-family:Saira,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans CJK KR',system-ui,sans-serif;word-break:keep-all;overflow-wrap:anywhere}.item-photo{display:none}
+@media(max-width:600px){.print-sheet{font-size:16px;padding:16px;gap:20px}.included-grid{grid-template-columns:1fr}.included-group li{font-size:16px;padding-block:10px}.included-group h3{font-size:18px}.rules{grid-template-columns:1fr 1fr}.tbc{font-size:12px}.sample-note,footer,.print-periods{font-size:13px}}
+@page{size:letter;margin:.5in}@media print{html,body{background:none}.print-toolbar{display:none}.print-sheet{max-width:none;width:720px;padding:0;gap:8px;min-height:0}.print-sheet section,.print-sheet header,.print-sheet footer{break-inside:avoid}.print-sheet *{box-shadow:none;text-shadow:none}.included-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rules{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.dated-offer{font-size:11px;line-height:1.3;border:1px solid var(--secondary);padding:4px 6px}header a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
+@media print{header a{display:inline;min-height:0}}
+/* Chrome exports Saira glyphs beside Chinese text without a usable text mapping, so copy, search and screen readers lost "Hotaru" in the preview notice; the Chinese footer uses the system Chinese face first. */
+:lang(zh) .print-sheet footer p{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",Saira,system-ui,sans-serif}
+</style><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0a08'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ffb13d'/%3E%3C/svg%3E"><meta name="description" content="Concept preview: a one-page printable menu for Hotaru Shabu &amp; Grill."><meta property="og:type" content="website"><meta property="og:site_name" content="Hotaru Shabu &amp; Grill"><meta property="og:title" content="Hotaru Shabu &amp; Grill · Printable menu"><meta property="og:description" content="Concept preview: a one-page printable menu for Hotaru Shabu &amp; Grill."><meta property="og:url" content="https://hotaru.fyt.life/print/"><meta property="og:image" content="https://hotaru.fyt.life/assets/share.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Hotaru Shabu &amp; Grill: shabu, grill or both, all you can eat, in Tustin"><meta name="twitter:card" content="summary_large_image"><script>(()=>{let saved=null;try{saved=localStorage.getItem('hotaru-lang')}catch{}const codes=['en','es','zh','ko'],q=new URLSearchParams(location.search);const l=q.has('lang')?(codes.includes(q.get('lang'))?q.get('lang'):'en'):codes.includes(saved)?saved:(navigator.languages||[]).map(x=>x.slice(0,2).toLowerCase()).find(x=>codes.includes(x))||'en';location.replace('/print/'+l+'.html?lang='+l)})();</script></head><body><nav class="print-toolbar" aria-label="Printable menu"><a href="/?lang=en#prices">Back to menu</a><a href="/print/en.html?lang=en" lang="en">EN</a><a href="/print/es.html?lang=es" lang="es">ES</a><a href="/print/zh.html?lang=zh" lang="zh-Hans">中文</a><a href="/print/ko.html?lang=ko" lang="ko">한국어</a></nav><main class="print-sheet" id="print-sheet"><header><h1>Hotaru Shabu &#38; Grill</h1><p><span data-contact="address">1056 Walnut Ave, Tustin, CA 92780 </span> · <a data-contact="phone" href="tel:+16572321441">(657) 232-1441</a><span data-contact="phone-qualification"></span></p><div class="print-hours"><b>Hours</b> <span data-hours="0">Mon–Fri · 4 – 11 PM <span class="tbc">hours to confirm</span></span><span data-hours="1">Sat–Sun · 11 AM – 11 PM <span class="tbc">hours to confirm</span></span></div></header><aside class="dated-offer" data-promo-ends="2026-09-30">Grand opening: 20% off your total bill through September 30 Offer ends on 2026-09-30. </aside><section><h2>Prices per adult</h2><table class="print-prices"><thead><tr><th>Options</th><th>Lunch</th><th>Dinner</th></tr></thead><tbody><tr><th>Shabu </th><td data-price="shabu.lunch"><span class="readout"><span class="vh">$39.95</span><span class="cur" aria-hidden="true">$</span><span class="seg" aria-hidden="true"><span class="ghost">88<span class="dp">.</span>88</span><span class="lit">39<span class="dp">.</span>95</span></span></span></td><td data-price="shabu.dinner"><span class="readout"><span class="vh">$49.95</span><span class="cur" aria-hidden="true">$</span><span class="seg" aria-hidden="true"><span class="ghost">88<span class="dp">.</span>88</span><span class="lit">49<span class="dp">.</span>95</span></span></span></td></tr><tr><th>Grill </th><td data-price="grill.lunch"><span class="readout"><span class="vh">$39.95</span><span class="cur" aria-hidden="true">$</span><span class="seg" aria-hidden="true"><span class="ghost">88<span class="dp">.</span>88</span><span class="lit">39<span class="dp">.</span>95</span></span></span></td><td data-price="grill.dinner"><span class="readout"><span class="vh">$49.95</span><span class="cur" aria-hidden="true">$</span><span class="seg" aria-hidden="true"><span class="ghost">88<span class="dp">.</span>88</span><span class="lit">49<span class="dp">.</span>95</span></span></span></td></tr><tr><th>Shabu + Grill </th><td data-price="both.lunch"><span class="readout"><span class="vh">Price to confirm</span><span class="seg" aria-hidden="true"><span class="ghost">88<span class="dp">.</span>88</span><span class="lit">--<span class="dp">.</span>--</span></span></span><span class="tbc">to confirm</span></td><td data-price="both.dinner"><span class="readout"><span class="vh">$49.99</span><span class="cur" aria-hidden="true">$</span><span class="seg" aria-hidden="true"><span class="ghost">88<span class="dp">.</span>88</span><span class="lit">49<span class="dp">.</span>99</span></span></span></td></tr></tbody></table><div class="print-periods"><p data-period="lunch"><b>Lunch</b> · Sat–Sun · 11 AM – 4 PM <span class="tbc">hours to confirm</span></p><p data-period="dinner"><b>Dinner</b> · Daily · 4 – 11 PM <span class="tbc">hours to confirm</span></p></div></section><section><h2>What&#39;s included</h2><p class="sample-note">Rows marked sample are placeholders until Hotaru shares its item list.</p><div class="included-grid"><section class="included-group" aria-labelledby="h-included-1"><h3 class="label" id="h-included-1">Meats</h3><ul><li data-item="h-item-1-1"><span class="item-name">Steak</span><span class="marks"><span class="vh">Included with Grill and Both</span><span class="chip" aria-hidden="true">Grill</span><span class="chip" aria-hidden="true">Both</span><span class="tbc">to confirm</span></span></li><li data-item="h-item-1-2"><span class="item-name">Thin-sliced beef</span><span class="marks"><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li><li data-item="h-item-1-3"><span class="item-name">Pork belly</span><span class="marks"><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li></ul></section><section class="included-group" aria-labelledby="h-included-2"><h3 class="label" id="h-included-2">Seafood</h3><ul><li data-item="h-item-2-1"><span class="item-name">Snakehead fish</span><span class="marks"><span class="vh">Included with Shabu and Both</span><span class="chip" aria-hidden="true">Shabu</span><span class="chip" aria-hidden="true">Both</span><span class="tbc">to confirm</span></span></li><li data-item="h-item-2-2"><span class="item-name">Shrimp</span><span class="marks"><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li></ul></section><section class="included-group" aria-labelledby="h-included-3"><h3 class="label" id="h-included-3">Broths</h3><ul><li data-item="h-item-3-1"><span class="item-name">Mild broth</span><span class="marks"><span class="vh">Included with Shabu and Both</span><span class="chip" aria-hidden="true">Shabu</span><span class="chip" aria-hidden="true">Both</span><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li><li data-item="h-item-3-2"><span class="item-name">Spicy broth</span><span class="marks"><span class="vh">Included with Shabu and Both</span><span class="chip" aria-hidden="true">Shabu</span><span class="chip" aria-hidden="true">Both</span><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li></ul></section><section class="included-group" aria-labelledby="h-included-4"><h3 class="label" id="h-included-4">Sauces and sides</h3><ul><li data-item="h-item-4-1"><span class="item-name">Appetizers</span><span class="marks"><span class="tbc">to confirm</span></span></li><li data-item="h-item-4-2"><span class="item-name">Self-serve vegetable bar</span><span class="marks"><span class="tbc">to confirm</span></span></li><li data-item="h-item-4-3"><span class="item-name">Dipping sauces</span><span class="marks"><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li></ul></section><section class="included-group" aria-labelledby="h-included-5"><h3 class="label" id="h-included-5">Desserts</h3><ul><li data-item="h-item-5-1"><span class="item-name">Ice cream</span><span class="marks"><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li><li data-item="h-item-5-2"><span class="item-name">Fresh fruit</span><span class="marks"><span class="tbc">to confirm</span><span class="tbc sample-pill">sample</span></span></li></ul></section><section class="included-group" aria-labelledby="h-included-6"><h3 class="label" id="h-included-6">Drinks</h3><ul><li data-item="h-item-6-1"><span class="item-name">Sodas</span><span class="marks"><span class="tbc">to confirm</span></span></li><li data-item="h-item-6-2"><span class="item-name">Calpico</span><span class="marks"><span class="tbc">to confirm</span></span></li></ul></section></div></section><section><h2>Before you sit down</h2><dl class="rules"><div class="fact" id="print-rule-time"><dt>Time limit</dt><dd><span class="tbc">to confirm</span></dd></div><div class="fact" id="print-rule-leftovers"><dt>Leftover charge</dt><dd><span class="tbc">to confirm</span></dd></div><div class="fact" id="print-rule-kids"><dt>Kids pricing</dt><dd><span class="tbc">to confirm</span></dd></div><div class="fact" id="print-rule-gratuity"><dt>Group gratuity</dt><dd><span class="tbc">to confirm</span></dd></div><div class="fact" id="print-rule-mix"><dt>Can one table mix options?</dt><dd><span class="tbc">to confirm</span></dd></div></dl></section><footer><p data-contact="site">hotaru.fyt.life</p><p>Concept preview. Not Hotaru&#39;s official menu. · Draft: some details are still to be confirmed</p></footer></main></body></html>

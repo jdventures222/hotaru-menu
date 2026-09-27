@@ -1,0 +1,26 @@
+{
+  "inputs": {
+    "en": {
+      "html": "output/print-menus/hotaru/HOTARU-Menu-en.html",
+      "sha256": "edbef7779a5693dce3713462d8a36a7910e363e2e7c2ae0a5e9adc34b3bc15dd"
+    },
+    "es": {
+      "html": "output/print-menus/hotaru/HOTARU-Menu-es.html",
+      "sha256": "1995588899e3c92827e4de6e7609c8c25dad2645e4eba73256ccd51a34148c32"
+    },
+    "zh": {
+      "html": "output/print-menus/hotaru/HOTARU-Menu-zh.html",
+      "sha256": "f81eab10901f8463e9b7d157305f5b461a409026989bd1adad933c83fbe5fb84"
+    },
+    "ko": {
+      "html": "output/print-menus/hotaru/HOTARU-Menu-ko.html",
+      "sha256": "fe1990a4d612cb823c03240265585444d4392a4993e1ec270ff28412e88172c6"
+    }
+  },
+  "pdfs": {
+    "en": "21a062b82623303b3bb9169a1c8b5a0e4fb55e91c04393ff3e719c76597473a0",
+    "es": "43798ba91eeb593ccf99d025394ccbdb0f375314c74d91a788d0528501d0b54d",
+    "zh": "cfa3fd645d1308b71cfa51ff2f2f0c388011db1f37aa79e24f7d14257dcc5e75",
+    "ko": "4307c88ce4902af5c0b3a381a22ba33d0b5676f8e705a5c28e5a87edae383830"
+  }
+}
