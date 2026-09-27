@@ -2,25 +2,25 @@
   "inputs": {
     "en": {
       "html": "output/print-menus/hotaru/HOTARU-Menu-en.html",
-      "sha256": "c928569492d69c7b857a408ab5450d2e29cc34449ef304f2d68e05ed98f45aaf"
+      "sha256": "a0399f66abd562d7e7ee2b1fa3252155460f0cda53cffa1338e303b6d8398c0d"
     },
     "es": {
       "html": "output/print-menus/hotaru/HOTARU-Menu-es.html",
-      "sha256": "7a2720d365afa62f7f9ecc7cb6993701af62c0b0657f6dbe9af77c4abfa63705"
+      "sha256": "add1726af93faeee87415ae0e876e4869c17139edc2220cc03532a937cd92b3e"
     },
     "zh": {
       "html": "output/print-menus/hotaru/HOTARU-Menu-zh.html",
-      "sha256": "097e8cb95e13ef9711dc5a8b5300d1c466521499665fc5a8869f3fc4ebf8ece4"
+      "sha256": "9924a61d06893e04757869afa9ba81cfe88bc03d140cb925fa8843781df210e1"
     },
     "ko": {
       "html": "output/print-menus/hotaru/HOTARU-Menu-ko.html",
-      "sha256": "ee68b9d305ce041032e29d41d4c8269be27b10555788378adb4f0a3702a78db5"
+      "sha256": "db8757f9a07c4003e707ddf9f3fa22809f42d8bcfc7d797cd7fb192109659819"
     }
   },
   "pdfs": {
-    "en": "d07a5fdfd12cbe4ecf24f59b26804cbd76d566a766ee09981e7e1344029c80b4",
-    "es": "987516646af4f0ba7a725ac7e9bd56579bbb7c0c9f9e43ba3bbda267a5cfeff7",
-    "zh": "1b5b12453c23f2a9a816b34936a0390ea37d60606c463d4557a4b0a618d63e7d",
-    "ko": "1b82b21fc25a846df80aa4e0a0cc8c822302f4291e101db28855750d4394541b"
+    "en": "5383737ae9227899f6b4683dc2d1783c3cf258b37e348faf3b24fbe15e274d76",
+    "es": "f5ab1185eeb7c8c58087b6fd75b362a5d7238d3583ba488095fbe0c1c8d0328f",
+    "zh": "674b10c8017c1430034382f47b4353818ae6d838a3bfc277bacdff7c0047c392",
+    "ko": "170fa29bda7e9717cc73171caec0a31e3a66b99a34f8e44573bc00d618c5c69d"
   }
 }
